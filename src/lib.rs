@@ -108,4 +108,15 @@ mod tests {
         assert_eq!(q.pop(), 2);
         assert!(q.push(3).is_ok());
     }
+
+    #[test]
+    fn it_should_handle_boxed_values() {
+        let q = PriorityBlockingQueue::new(10);
+        q.push(Box::new(2));
+        q.push(Box::new(1));
+        q.push(Box::new(3));
+        assert_eq!(*q.pop(), 3);
+        assert_eq!(*q.pop(), 2);
+        assert_eq!(*q.pop(), 1);
+    }
 }
